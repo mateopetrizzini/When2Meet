@@ -1,0 +1,52 @@
+:root {
+
+    --bg: #0f172a;
+    --card: #1e293b;
+    --text: #f1f5f9;
+    --muted: #94a3b8;
+
+    --primary:#6366f1;
+    --danger: #ef4444;
+
+    --radius: 12px;
+    --shadow: 0 8px 20px rgba(0,0,0,0.25);
+
+}
+
+.light {
+    --bg: radial-gradient(
+        circle at 20% 20%,
+        #7dd3fc,
+        transparent 40%
+    ),
+    radial-gradient(
+        circle at 80% 80%,
+        #38bdf8,
+        transparent 50%
+    ),
+    linear-gradient(135deg, #e0f2fe, #7dd3fc);
+    --card: rgba(255, 255, 255, 0.9);
+    --text: #0f172a;
+    --muted: #475569;
+
+    --primary: #0284c7;
+}
+
+.dark {
+    --bg: radial-gradient(
+        circle at 20% 20%,
+        #1e1b4b,
+        transparent 40%
+    ),
+
+    radial-gradient(
+        circle at 80% 80%,
+        #0f172a,
+        transparent 50%
+    ), linear-gradient(135deg, #0f172a, #1e293b);
+    --card: #1e293b;
+    --text: #f1f5f9;
+    --muted: #94a3b8;
+
+    --primary: #6366f1;
+}
