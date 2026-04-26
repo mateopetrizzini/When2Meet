@@ -20,11 +20,9 @@ function App() {
   return user ? (
     <>
 
-      <button onClick={toggleTheme} className="theme-toggle">
-        {theme === "dark" ? "☀️" : "🌙"}
-      </button>
 
-      <Notes />
+
+      <Notes toggleTheme={toggleTheme} theme={theme}/>
 
     </>
   ) : (

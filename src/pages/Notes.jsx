@@ -3,8 +3,9 @@ import { useAuth } from "../store/useAuth";
 import { getNotes, createNote, deleteNote, updateNote } from "../features/notes/notesService";
 import NotesInput from "../features/notes/components/NotesInput";
 import NoteCard from "../features/notes/components/NoteCard";
+import { supabase } from "../services/supabase";
 
-function Notes() {
+function Notes({toggleTheme, theme}) {
 
     const { user } = useAuth();
 
@@ -22,7 +23,9 @@ function Notes() {
         setNotes( data || []);
     };
 
-
+    const handleLogOut = async () => {
+        await supabase.auth.signOut();
+    };
 
     useEffect(() => {
         loadNotes();
@@ -87,7 +90,24 @@ function Notes() {
   return (
     <div className="notes-container">
 
+    <div className="top-bar">
+
         <h2>Notas</h2>
+
+        <div className="top-actions">
+
+        <button onClick={toggleTheme} className="theme-toggle-inline">
+            {theme === "dark" ? "☀️" : "🌙"}
+        </button>
+
+        <button onClick={handleLogOut} className="logout-btn">
+            Cerrar sesión
+        </button>
+
+        </div>
+
+    </div>
+
 
         <NotesInput
             text={text}
