@@ -3,9 +3,8 @@ import { useAuth } from "../store/useAuth";
 import { getNotes, createNote, deleteNote, updateNote } from "../features/notes/notesService";
 import NotesInput from "../features/notes/components/NotesInput";
 import NoteCard from "../features/notes/components/NoteCard";
-import { supabase } from "../services/supabase";
 
-function Notes({}) {
+function Notes() {
 
     const { user } = useAuth();
 
@@ -22,10 +21,6 @@ function Notes({}) {
     const loadNotes = async () => {
         const { data } = await getNotes();
         setNotes( data || []);
-    };
-
-    const handleLogOut = async () => {
-        await supabase.auth.signOut();
     };
 
     useEffect(() => {
@@ -139,10 +134,6 @@ function Notes({}) {
         <h2>Notas</h2>
 
         <div className="top-actions">
-
-        <button onClick={handleLogOut} className="logout-btn">
-            Cerrar sesión
-        </button>
 
         </div>
 
