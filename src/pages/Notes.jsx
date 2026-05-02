@@ -5,7 +5,7 @@ import NotesInput from "../features/notes/components/NotesInput";
 import NoteCard from "../features/notes/components/NoteCard";
 import { supabase } from "../services/supabase";
 
-function Notes({toggleTheme, theme}) {
+function Notes({}) {
 
     const { user } = useAuth();
 
@@ -16,6 +16,7 @@ function Notes({toggleTheme, theme}) {
     const [editingId, setEditingId] = useState(null);
     const [editText, setEditText] = useState("");
     const [deletingId, setDeletingId] = useState(null);
+    const [notifiedIds, setNotifiedIds] = useState([]);
  
 
     const loadNotes = async () => {
@@ -87,6 +88,49 @@ function Notes({toggleTheme, theme}) {
         setEditText("");
     }
 
+
+    useEffect(() => {
+        if ("Notification" in window) {
+            Notification.requestPermission();
+        }
+    },[]);
+
+    const showNotification = (note) => {
+        if (Notification.permission === "granted") {
+            new Notification("⏰ Recordatorio", {
+                body: note.content,
+            });
+        }
+    };
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            const now = new Date();
+
+            notes.forEach((note) => {
+                if (note.reminder_at) {
+                    const reminderTime = new Date(note.reminder_at);
+
+                    const diff = reminderTime - now;
+
+                    if (
+                        diff <= 0 &&
+                        !notifiedIds.includes(note.id)
+                        ) {
+                        showNotification(note);
+                        setNotifiedIds((prev) => {
+                            if (prev.includes(note.id)) return prev;
+                            return [...prev, note.id];
+                        });
+                    }
+                }
+            });
+        }, 1000);
+
+        return() => clearInterval(interval);
+    }, [notes, notifiedIds]);
+
+
   return (
     <div className="notes-container">
 
@@ -95,10 +139,6 @@ function Notes({toggleTheme, theme}) {
         <h2>Notas</h2>
 
         <div className="top-actions">
-
-        <button onClick={toggleTheme} className="theme-toggle-inline">
-            {theme === "dark" ? "☀️" : "🌙"}
-        </button>
 
         <button onClick={handleLogOut} className="logout-btn">
             Cerrar sesión

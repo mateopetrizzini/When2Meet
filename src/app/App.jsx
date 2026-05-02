@@ -17,17 +17,17 @@ function App() {
     setTheme((prev) => (prev ==="dark" ? "light" : "dark"));
   };
   
-  return user ? (
+  return (
     <>
 
+      <button onClick={toggleTheme} className="theme-toggle">
+        {theme === "dark" ? "☀️" : "🌙"}
+      </button>
 
-
-      <Notes toggleTheme={toggleTheme} theme={theme}/>
+      {user ? <Notes /> : <Auth/>}
 
     </>
-  ) : (
-        <Auth />
-      )
+  );
 
 
   

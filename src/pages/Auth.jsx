@@ -26,43 +26,105 @@ const Auth = () => {
     };
 
     return (
-        <div style={{ maxWidth: "400px", margin: "auto" }}>
 
-            <h2>{isLogin ? "Login" : "Register"}</h2>
+        <div className="auth-container">
 
-            <form onSubmit={handleSubmit}>
+            <div className="auth-card">
 
-                <input
+                <h2>{isLogin ? "Iniciar sesión" : "Crear cuenta"}</h2>
+
+                <input 
                     type="email"
                     placeholder="Email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    required
                 />
 
-                <input
+                <input 
                     type="password"
-                    placeholder="Password"
+                    placeholder="Contraseña"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    required
                 />
 
-                <button type="submit">
-                    {isLogin ? "Login" : "Register"}
+                <button onClick={handleSubmit}>
+                    {isLogin ? "Ingresar" : "Registrarse"}
                 </button>
+                
+                    <p className="auth-switch">
+                    {isLogin ? (
+                        <>
+                        ¿No tienes cuenta?{" "}
+                        <span onClick={() => setIsLogin(false)}>
+                            Regístrate
+                        </span>
+                        </>
 
-            </form>
-
-            {error && <p style={{color: "red" }}> {error} </p> }
-
-            <button onClick={() => setIsLogin(!isLogin)}>
-                {isLogin
-                ? "No tienes cuenta? Registrate"
-                : "Ya tienes cuenta? Login"}
-            </button>
+                    ) : (
+                        <>
+                            ¿Ya tienes cuenta? {" "}
+                            <span onClick={() => setIsLogin(true)}>
+                                Iniciar sesión
+                            </span>
+                        </>
+                    )}
+                </p>
+            </div>
 
         </div>
+
+        // <div style={{ maxWidth: "400px", margin: "auto" }}>
+
+        //     <h2>{isLogin ? "Login" : "Register"}</h2>
+
+        //     <form onSubmit={handleSubmit}>
+
+        //         <input
+        //             type="email"
+        //             placeholder="Email"
+        //             value={email}
+        //             onChange={(e) => setEmail(e.target.value)}
+        //             required
+        //         />
+
+        //         <input
+        //             type="password"
+        //             placeholder="Password"
+        //             value={password}
+        //             onChange={(e) => setPassword(e.target.value)}
+        //             required
+        //         />
+
+        //         <button type="submit">
+        //             {isLogin ? "Login" : "Register"}
+        //         </button>
+
+        //     </form>
+
+        //     {error && <p style={{color: "red" }}> {error} </p> }
+
+        //     <p className="auth-switch">
+        //         {isLogin ? (
+        //             <>
+        //                 ¿No tienes cuenta? {" "}
+        //                 <span onClick={() => setIsLogin(false)}>
+        //                     Regístrate
+        //                 </span>                        
+        //             </>
+
+        //         ) : (
+
+        //             <>                    
+        //             ¿Ya tienes cuenta?{" "}
+        //             <span onClick={() => setIsLogin(true)}>
+        //                  Iniciar sesión
+        //             </span>
+        //             </>
+
+        //         )}
+        //     </p>
+
+        // </div>
     );
 };
 
