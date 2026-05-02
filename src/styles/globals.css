@@ -22,7 +22,7 @@ body {
 
     position: fixed;
     
-    top: 20px;
+    bottom: 20px;
 
     right: 20px;
 
@@ -32,7 +32,7 @@ body {
 
     color: var(--text);
 
-    padding: 10px;
+    padding: 12px;
 
     border-radius: 50%;
 
@@ -41,10 +41,12 @@ body {
     backdrop-filter: blur(6px);
 
     transition: 0.2s;
+
+    z-index: 1000;
 }
 
 .theme-toggle:hover {
-    transform: scale(1.1);
+    transform: scale(1.08);
 }
 
 
@@ -101,13 +103,17 @@ body {
 
 .navbar {
 
+    position: relative;
+
+    z-index: 100;
+
     display: flex;
 
     justify-content: space-between;
 
     align-items: center;
 
-    padding: 18px 24px;
+    padding: 18px 70px 18px 24px;
 
     margin-bottom: 20px;
 
@@ -161,6 +167,48 @@ body {
 
         padding: 12px;
 
+    }
+
+    .navbar {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 14px;
+
+        padding: 16px;
+
+    }
+
+    .nav-links {
+
+        width: 100%;
+
+        display: flex;
+
+        flex-wrap: wrap;
+
+        gap: 10px;
+
+    }
+
+    .nav-links a,
+    .nav-links button {
+
+        flex: 1;
+
+        min-width: 110px;
+
+        text-align: center;
+
+        padding: 10px 14px;
+
+        border-radius: 10px;
+
+    }
+
+    .logo{
+        font-size: 18px;
     }
 
     .note-card {
